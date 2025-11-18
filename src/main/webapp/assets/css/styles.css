@@ -1,0 +1,444 @@
+body{font-family:system-ui,Segoe UI,Arial,sans-serif;margin:0;background:#f6f7fb;color:#222}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#fff;border-bottom:1px solid #eee}
+.nav a{margin:0 8px;text-decoration:none;color:#0366d6}
+.container{max-width:960px;margin:24px auto;padding:0 16px}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin-bottom:16px}
+.input, select{width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;margin:6px 0}
+.btn{display:inline-block;padding:10px 14px;border-radius:8px;border:0;background:#0366d6;color:#fff;cursor:pointer}
+.btn.secondary{background:#6b7280}
+.table{width:100%;border-collapse:collapse}
+.table th,.table td{padding:8px;border-bottom:1px solid #eee;text-align:left}
+.flash{padding:10px;border-radius:8px;margin:10px 0}
+.flash.error{background:#fee2e2}
+.flash.success{background:#dcfce7}
+
+/* DARK MODE */
+html[data-theme='DARK'] body {
+    background: #1e1e1e;
+    color: #f5f5f5;
+}
+
+html[data-theme='DARK'] .nav {
+    background: #2a2a2a;
+    border-bottom: 1px solid #444;
+}
+
+html[data-theme='DARK'] .card {
+    background: #2b2b2b;
+    border: 1px solid #444;
+}
+
+html[data-theme='DARK'] .input,
+html[data-theme='DARK'] select {
+    background:#333;
+    border:1px solid #555;
+    color:#fff;
+}
+
+html[data-theme='DARK'] .btn {
+    background:#4e8cff;
+}
+
+html[data-theme='DARK'] .btn.secondary {
+    background:#777;
+}
+
+html[data-theme='DARK'] .table th,
+html[data-theme='DARK'] .table td {
+    border-bottom:1px solid #555;
+}
+
+
+
+
+/*body.login-bg {*/
+/*    background-image: url("../img/login-bg.avif");*/
+/*    background-size: cover;*/
+/*    background-position: center;*/
+/*    background-repeat: no-repeat;*/
+/*    background-attachment: fixed;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
+
+
+/* Login background */
+body.login-bg {
+    background-image: url("../img/login-bg.avif");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;          /* Force full screen */
+    overflow: hidden;       /* Remove scroll */
+}
+
+body.preference {
+    background-image: url("../img/preference2.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;          /* Force full screen */
+    overflow: hidden;       /* Remove scroll */
+}
+body.dashboard {
+    background-image: url("../img/dashboard.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+
+    /* FIXES */
+    min-height: 100vh;   /* allow page to grow taller */
+    overflow-x: hidden;  /* hide sideways scroll ONLY */
+    overflow-y: auto;    /* ✔ scrolling works */
+}
+
+body.alert {
+    background-image: url("../img/alert.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+
+    /* FIXES */
+    min-height: 100vh;   /* allow page to grow taller */
+    overflow-x: hidden;  /* hide sideways scroll ONLY */
+    overflow-y: auto;    /* ✔ scrolling works */
+}
+
+body.export {
+    background-image: url("../img/export.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+
+    /* FIXES */
+    min-height: 100vh;   /* allow page to grow taller */
+    overflow-x: hidden;  /* hide sideways scroll ONLY */
+    overflow-y: auto;    /* ✔ scrolling works */
+}
+
+body.add_expense {
+    background-image: url("../img/add_expense.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+
+    /* FIXES */
+    min-height: 100vh;   /* allow page to grow taller */
+    overflow-x: hidden;  /* hide sideways scroll ONLY */
+    overflow-y: auto;    /* ✔ scrolling works */
+}
+
+
+
+/* ============================
+   FIX LOGIN CARD ALIGNMENT
+============================ */
+
+/* Move card slightly UP (not too high) */
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding-top: 20px;   /* pushes slightly upward */
+}
+
+/* Increase card size downward */
+.login-card {
+    width: 480px;
+    padding: 32px 32px 45px 32px;   /* bottom padding increased */
+    margin-top: -20px;             /* moves card up just a little */
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0px 10px 40px rgba(0,0,0,0.25);
+}
+
+/* Add spacing under last button */
+.login-card button:last-of-type {
+    margin-bottom: 10px;
+}
+
+.login-card * {
+    width: 100%;
+    box-sizing: border-box;       /* Ensures everything aligns perfectly */
+}
+
+
+/* Headings */
+.login-card h2, .login-card h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+/* Inputs */
+.input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 8px 0;
+}
+
+/* Buttons – FIXED WIDTH */
+/* DEFAULT button style (for dashboard etc.) */
+.btn {
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 0;
+    background: #0366d6;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Full-width only for login page */
+.login-card .btn {
+    width: 100%;
+    padding: 12px;
+}
+
+
+
+/* Fix table action buttons */
+.table .btn {
+    width: auto;                /* Prevents stretching */
+    padding: 6px 14px;          /* Compact buttons */
+    font-size: 14px;
+    display: inline-block;
+    white-space: nowrap;        /* Keeps on same line */
+}
+
+.table td {
+    white-space: nowrap;        /* Ensures row content stays on one line */
+}
+
+.table tr td:last-child {
+    width: 140px;               /* Enough space for both buttons */
+}
+
+
+/* ============================
+   DASHBOARD LAYOUT IMPROVEMENTS
+============================ */
+
+/* Outer layout */
+.dashboard-layout {
+    display: flex;
+    gap: 24px;
+    margin-top: 20px;
+}
+
+/* Left filter card */
+.dashboard-sidebar {
+    width: 280px;
+    flex-shrink: 0;
+}
+
+/* Main section */
+.dashboard-main {
+    flex: 1;
+}
+
+/* Beautiful card style */
+.card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+
+    /* ✨ Modern elevation */
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.05);
+    transition: box-shadow 0.2s;
+}
+
+.card:hover {
+    box-shadow: 0px 6px 18px rgba(0,0,0,0.08);
+}
+
+/* Section titles */
+.section-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+/* Table improvements */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+.table th {
+    background: #f9fafb;
+    font-weight: 600;
+    padding: 12px;
+}
+
+.table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Action buttons inline + clean */
+.table tr td:last-child {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.btn.small {
+    padding: 6px 12px;
+    font-size: 13px;
+    margin-left: 4px;
+    border-radius: 6px;
+}
+
+/* Monthly total card */
+.total-card {
+    text-align: center;
+}
+
+.total-card .amount {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.total-card small {
+    color: #666;
+    font-size: 13px;
+}
+
+/* ---------------------------------------
+   SIDEBAR LAYOUT FIXES
+---------------------------------------- */
+.dashboard-layout {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+    align-items: flex-start;
+}
+
+/* Sidebar slimmer */
+.dashboard-sidebar {
+    width: 240px;
+    flex-shrink: 0;
+}
+
+/* Filter card compact */
+.dashboard-filter-card {
+    padding: 14px !important;
+}
+
+.dashboard-filter-card h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.dashboard-filter-card label {
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.dashboard-filter-card .input,
+.dashboard-filter-card select {
+    padding: 6px 10px;
+    font-size: 13px;
+    height: 34px;
+}
+
+/* Monthly total card compact */
+.dashboard-total-card h3 {
+    font-size: 18px;
+}
+
+.dashboard-total-card p {
+    margin-top: 6px;
+    font-size: 14px;
+}
+
+/* DO NOT TOUCH TABLE — so table code unchanged */
+
+/* FIX: Prevent Year and Month inputs from overflowing sidebar */
+.dashboard-sidebar .input,
+.dashboard-sidebar select {
+    width: 100%;
+    max-width: 210px;     /* <--- THIS FIXES THE OVERFLOW */
+    box-sizing: border-box;
+}
+
+/* Ensuring the form is centered and has some spacing */
+.form-container {
+    max-width: 500px; /* Set max width */
+    margin: 0 ;   /* Center the form horizontally */
+    padding: 20px;    /* Add some padding around */
+    background-color: #fff; /* Ensure the background is consistent */
+    border-radius: 12px;
+}
+
+/* Giving inputs and selects a consistent width */
+.input, select {
+    width: 100%; /* Ensure all inputs take the full width */
+    padding: 10px;
+    margin-bottom: 12px; /* Ensure some space between elements */
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Style for the custom category box */
+#customCategoryBox {
+    margin-top: 10px;
+}
+
+/* Ensure buttons are styled correctly */
+.btn {
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 0;
+    background-color: #0366d6;
+    color: white;
+    cursor: pointer;
+    width: 100%; /* Make the button full-width */
+}
+
+/* Flash error messages */
+.flash {
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.flash.error {
+    background-color: #fee2e2;
+    color: #f87171;
+}
+
+.flash.success {
+    background-color: #dcfce7;
+    color: #34d399;
+}
+
+
