@@ -44,4 +44,3 @@ public class AlertServlet extends HttpServlet {
     }
   }
 }
-

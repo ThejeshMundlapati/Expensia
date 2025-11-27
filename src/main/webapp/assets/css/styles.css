@@ -442,3 +442,85 @@ body.add_expense {
 }
 
 
+/* ============================================
+   FIX DARK MODE TEXT ON DASHBOARD BACKGROUND
+=============================================== */
+
+/* All normal text */
+html[data-theme='DARK'] body.dashboard * {
+    color: #ffffff !important;
+}
+
+/* Table header background should be darker */
+html[data-theme='DARK'] body.dashboard .table th {
+    background: rgba(0,0,0,0.4) !important;
+}
+
+/* Table row shading */
+html[data-theme='DARK'] body.dashboard .table td {
+    background: rgba(0,0,0,0.25) !important;
+}
+
+/* Cards */
+html[data-theme='DARK'] body.dashboard .card {
+    background: rgba(20, 20, 20, 0.80) !important;
+    border-color: #555 !important;
+}
+
+/* Buttons */
+html[data-theme='DARK'] body.dashboard .btn {
+    background: #4e8cff !important;
+    color: white !important;
+}
+
+/* Sidebar labels (Month/Year) */
+html[data-theme='DARK'] body.dashboard label {
+    color: #ffffff !important;
+}
+
+/* Input fields */
+html[data-theme='DARK'] body.dashboard .input,
+html[data-theme='DARK'] body.dashboard select {
+    background: #333 !important;
+    color: white !important;
+    border-color: #666 !important;
+}
+
+/* ============================================
+   FIX DARK MODE TEXT ON ALERT PAGE
+=============================================== */
+
+html[data-theme='DARK'] body.alert * {
+    color: #ffffff !important;
+}
+
+/* Table header background dark */
+html[data-theme='DARK'] body.alert .table th {
+    background: rgba(0,0,0,0.45) !important;
+}
+
+/* Table rows */
+html[data-theme='DARK'] body.alert .table td {
+    background: rgba(0,0,0,0.25) !important;
+}
+
+/* Card background */
+html[data-theme='DARK'] body.alert .card {
+    background: rgba(20,20,20,0.85) !important;
+    border-color: #555 !important;
+}
+
+/* Buttons (Mark seen) */
+html[data-theme='DARK'] body.alert .btn,
+html[data-theme='DARK'] body.alert .btn.secondary {
+    background: #4e8cff !important;
+    color: white !important;
+}
+
+/* Input fields (if any later added) */
+html[data-theme='DARK'] body.alert input {
+    background: #333 !important;
+    border-color: #666 !important;
+    color: #fff !important;
+}
+

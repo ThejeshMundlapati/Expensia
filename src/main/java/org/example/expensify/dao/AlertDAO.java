@@ -44,4 +44,22 @@ public class AlertDAO {
       ps.executeUpdate();
     }
   }
+
+  // Add this method to your existing AlertDAO class
+
+  public int countUnseen(int userId) throws Exception {
+    String sql = "SELECT COUNT(*) FROM alerts WHERE user_id = ? AND seen = 0";
+
+    try (Connection c = DB.get();
+         PreparedStatement ps = c.prepareStatement(sql)) {
+
+      ps.setInt(1, userId);
+      try (ResultSet rs = ps.executeQuery()) {
+        if (rs.next()) {
+          return rs.getInt(1);
+        }
+      }
+    }
+    return 0;
+  }
 }
