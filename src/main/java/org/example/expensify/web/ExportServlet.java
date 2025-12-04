@@ -50,7 +50,6 @@ public class ExportServlet extends HttpServlet {
     }
   }
 
-  // ======================== CSV Export ========================
   private void exportCSV(List<Map<String, Object>> rows,
                          LocalDate from, LocalDate to,
                          HttpServletResponse resp) throws IOException {
@@ -67,7 +66,6 @@ public class ExportServlet extends HttpServlet {
       String desc = (String) r.get("description");
       if (desc == null) desc = "";
 
-      // Escape double quotes in description for CSV
       desc = desc.replace("\"", "\"\"");
 
       out.println(
@@ -83,7 +81,6 @@ public class ExportServlet extends HttpServlet {
     out.flush();
   }
 
-  // ======================== Helper: escape for PDF text ========================
   private String pdfEscape(String s) {
     if (s == null) return "";
     // Escape backslash and parentheses for PDF literals
@@ -92,7 +89,6 @@ public class ExportServlet extends HttpServlet {
         .replace(")", "\\)");
   }
 
-  // ======================== PDF Export (readable, row-by-row) ========================
   private void exportPDF(List<Map<String, Object>> rows,
                          LocalDate from, LocalDate to,
                          HttpServletResponse resp) throws IOException {
@@ -104,19 +100,16 @@ public class ExportServlet extends HttpServlet {
 
     var out = resp.getOutputStream();
 
-    // --- Minimal PDF structure ---
     out.println("%PDF-1.4");
     out.println("1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj");
     out.println("2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj");
     out.println("3 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 600 800] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >> endobj");
 
-    // ---------- Build text content (monospace columns) ----------
     StringBuilder content = new StringBuilder();
     content.append("BT\n");
     content.append("/F1 10 Tf\n");
     content.append("50 780 Td\n");
 
-    // Title
     String title = "Expense Report " + from + (to != null ? " to " + to : "");
     content.append("(").append(pdfEscape(title)).append(") Tj\n");
     content.append("0 -18 Td\n");
@@ -124,7 +117,6 @@ public class ExportServlet extends HttpServlet {
     if (rows.isEmpty()) {
       content.append("(").append(pdfEscape("No expenses in this period.")).append(") Tj\n");
     } else {
-      // Header row
       String header = String.format(
           "%-12s %-10s %-4s %-15s %-25s %-10s",
           "Date", "Amount", "Cur", "Category", "Description", "Payment"
@@ -132,13 +124,11 @@ public class ExportServlet extends HttpServlet {
       content.append("(").append(pdfEscape(header)).append(") Tj\n");
       content.append("0 -14 Td\n");
 
-      // Separator
       String sep = "---------------------------------------------------------------"
           + "------------------------------";
       content.append("(").append(pdfEscape(sep)).append(") Tj\n");
       content.append("0 -14 Td\n");
 
-      // Data rows
       for (Map<String, Object> r : rows) {
         String dateStr = String.valueOf(r.get("expenseDate"));
 
@@ -159,7 +149,6 @@ public class ExportServlet extends HttpServlet {
             ? r.get("paymentMethod").toString()
             : "";
 
-        // Truncate long description so it doesn't run off the page
         if (desc.length() > 22) {
           desc = desc.substring(0, 22) + "...";
         }
@@ -182,10 +171,8 @@ public class ExportServlet extends HttpServlet {
     out.println(stream);
     out.println("endstream endobj");
 
-    // Monospace font (for aligned columns)
     out.println("5 0 obj << /Type /Font /Subtype /Type1 /Name /F1 /BaseFont /Courier >> endobj");
 
-    // Minimal xref/trailer (simple but accepted by viewers)
     out.println("xref 0 6");
     out.println("0000000000 65535 f ");
     out.println("trailer << /Size 6 /Root 1 0 R >>");

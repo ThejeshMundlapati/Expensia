@@ -7,7 +7,6 @@ public class Budget {
   private int year;
   private double budgetLimit;
 
-  // getters/setters
   public int getBudgetId() {
     return budgetId;
   }

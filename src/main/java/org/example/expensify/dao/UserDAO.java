@@ -41,7 +41,6 @@ public class UserDAO {
       try (ResultSet keys = ps.getGeneratedKeys()) {
         if (keys.next()) {
           int id = keys.getInt(1);
-          // create default preferences for the user
           try (PreparedStatement ps2 = c.prepareStatement(
               "INSERT INTO preferences(user_id) VALUES (?)")) {
             ps2.setInt(1, id);

@@ -13,7 +13,6 @@ public class AlertNotificationFilter implements Filter {
 
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
-    // No initialization needed
   }
 
   @Override
@@ -23,7 +22,6 @@ public class AlertNotificationFilter implements Filter {
     HttpServletRequest httpReq = (HttpServletRequest) request;
     HttpSession session = httpReq.getSession(false);
 
-    // Only calculate for logged-in users (check if session exists and has uid)
     if (session != null && session.getAttribute("uid") != null) {
       try {
         int userId = (Integer) session.getAttribute("uid");  // Changed from "userId" to "uid"
@@ -31,9 +29,7 @@ public class AlertNotificationFilter implements Filter {
         int unseenCount = alertDAO.countUnseen(userId);
         httpReq.setAttribute("unseenAlertsCount", unseenCount);
       } catch (Exception e) {
-        // Log error but don't break the request
         e.printStackTrace();
-        // Set to 0 if there's an error
         httpReq.setAttribute("unseenAlertsCount", 0);
       }
     }
@@ -43,6 +39,5 @@ public class AlertNotificationFilter implements Filter {
 
   @Override
   public void destroy() {
-    // No cleanup needed
   }
 }

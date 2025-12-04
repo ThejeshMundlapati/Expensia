@@ -1,6 +1,5 @@
 package org.example.expensify.dao;
 
-
 import java.sql.*;
 import org.example.expensify.config.DB;
 import org.example.expensify.model.Budget;

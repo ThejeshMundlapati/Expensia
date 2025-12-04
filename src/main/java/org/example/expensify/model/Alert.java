@@ -3,13 +3,12 @@ package org.example.expensify.model;
 public class Alert {
   private int alertId;
   private int userId;
-  private String alertType; // FIFTY_EARLY / NINETY
+  private String alertType;
   private String message;
   private int month;
   private int year;
   private boolean seen;
 
-  // getters/setters
 
   public int getAlertId() {
     return alertId;

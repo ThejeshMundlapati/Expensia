@@ -8,8 +8,6 @@ public class User {
   private String email;
   private String phone;
 
-  // getters/setters
-  // ...
   public int getUserId() { return userId; }
   public void setUserId(int id) { this.userId = id; }
   public String getUsername() { return username; }

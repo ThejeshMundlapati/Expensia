@@ -16,17 +16,14 @@ import org.example.expensify.config.DB;
 
 public class ExpenseDAO {
 
-  // ==============================
-  // ADD EXPENSE (6-parameter SP)
-  // ==============================
-  public void addViaProcedure(int userId,
-                              int categoryId,
-                              double amount,
-                              LocalDate date,
-                              String desc,
-                              String method) throws Exception {
+  /**
+   * Add expense via stored procedure (with currency)
+   */
+  public void addViaProcedure(int userId, int categoryId, double amount,
+                              LocalDate date, String desc, String method,
+                              String currency) throws Exception {
 
-    final String call = "{CALL add_expense(?,?,?,?,?,?)}";
+    final String call = "{CALL add_expense(?,?,?,?,?,?,?)}";
 
     try (Connection c = DB.get();
          CallableStatement cs = c.prepareCall(call)) {
@@ -43,34 +40,23 @@ public class ExpenseDAO {
       }
 
       cs.setString(6, method);
+      cs.setString(7, currency != null ? currency : "USD");
       cs.execute();
     }
   }
 
-  // 7-param overload – still supported (uses DB SP that accepts currency)
+  /**
+   * Convenience overload - defaults to USD currency
+   */
   public void addViaProcedure(int userId, int categoryId, double amount,
-                              LocalDate date, String desc, String method, String currency)
+                              LocalDate date, String desc, String method)
       throws Exception {
-
-    final String call = "{CALL add_expense(?,?,?,?,?,?,?)}";
-
-    try (Connection c = DB.get();
-         CallableStatement cs = c.prepareCall(call)) {
-
-      cs.setInt(1, userId);
-      cs.setInt(2, categoryId);
-      cs.setBigDecimal(3, java.math.BigDecimal.valueOf(amount));
-      cs.setDate(4, Date.valueOf(date));
-      cs.setString(5, desc);
-      cs.setString(6, method);
-      cs.setString(7, currency);
-      cs.execute();
-    }
+    addViaProcedure(userId, categoryId, amount, date, desc, method, "USD");
   }
 
-  // ==============================
-  // NEW: find single expense
-  // ==============================
+  /**
+   * Find a single expense by ID (with ownership check)
+   */
   public Map<String, Object> findById(int userId, int expenseId) throws Exception {
     String sql = """
             SELECT e.expense_id, e.user_id, e.category_id,
@@ -107,15 +93,11 @@ public class ExpenseDAO {
     return null;
   }
 
-  // ==============================
-  // UPDATE existing expense
-  // ==============================
-  public void updateExpense(int userId,
-                            int expenseId,
-                            int categoryId,
-                            double amount,
-                            LocalDate date,
-                            String desc,
+  /**
+   * Update an existing expense
+   */
+  public void updateExpense(int userId, int expenseId, int categoryId,
+                            double amount, LocalDate date, String desc,
                             String method) throws Exception {
 
     String sql = """
@@ -149,9 +131,9 @@ public class ExpenseDAO {
     }
   }
 
-  // ==============================
-  // NEW: total for a month/year
-  // ==============================
+  /**
+   * Get total spending for a specific month/year
+   */
   public double monthTotal(int userId, int month, int year) throws Exception {
     String sql = """
             SELECT COALESCE(SUM(amount), 0.0)
@@ -177,9 +159,9 @@ public class ExpenseDAO {
     return 0.0;
   }
 
-  // ==============================
-  // FILTER BY MONTH/YEAR (used on dashboard)
-  // ==============================
+  /**
+   * List expenses for a specific month/year
+   */
   public List<Map<String, Object>> listByMonth(int userId, int month, int year)
       throws Exception {
 
@@ -220,9 +202,9 @@ public class ExpenseDAO {
     return out;
   }
 
-  // ==============================
-  // Recent list (kept for other pages)
-  // ==============================
+  /**
+   * List most recent expenses (limited)
+   */
   public List<Map<String, Object>> listRecent(int userId, int limit) throws Exception {
     String sql = """
             SELECT e.expense_id, e.amount, e.expense_date, e.description,
@@ -245,12 +227,12 @@ public class ExpenseDAO {
       try (ResultSet rs = ps.executeQuery()) {
         while (rs.next()) {
           Map<String, Object> row = new HashMap<>();
+          row.put("expenseId", rs.getInt("expense_id"));
           row.put("expenseDate", rs.getDate("expense_date").toLocalDate());
           row.put("amount", rs.getDouble("amount"));
           row.put("description", rs.getString("description"));
           row.put("paymentMethod", rs.getString("payment_method"));
           row.put("categoryName", rs.getString("category_name"));
-          row.put("expenseId", rs.getInt("expense_id"));
           row.put("currency", rs.getString("currency"));
           out.add(row);
         }
@@ -259,22 +241,27 @@ public class ExpenseDAO {
     return out;
   }
 
-  // ==============================
-  // delete + listAll (unchanged)
-  // ==============================
+  /**
+   * Delete an expense (with ownership check)
+   */
   public void delete(int userId, int expenseId) throws Exception {
-    String sql = "DELETE FROM expenses WHERE expense_id=? AND user_id=?";
-    try (Connection c = DB.get(); PreparedStatement ps = c.prepareStatement(sql)) {
+    String sql = "DELETE FROM expenses WHERE expense_id = ? AND user_id = ?";
+
+    try (Connection c = DB.get();
+         PreparedStatement ps = c.prepareStatement(sql)) {
       ps.setInt(1, expenseId);
       ps.setInt(2, userId);
       ps.executeUpdate();
     }
   }
 
+  /**
+   * List all expenses for a user
+   */
   public List<Map<String, Object>> listAll(int userId) throws Exception {
     String sql = """
             SELECT e.expense_id, e.amount, e.expense_date, e.description,
-                   e.payment_method, c.category_name
+                   e.payment_method, c.category_name, e.currency
             FROM expenses e
             JOIN categories c ON e.category_id = c.category_id
             WHERE e.user_id = ?
@@ -297,6 +284,7 @@ public class ExpenseDAO {
           row.put("description", rs.getString("description"));
           row.put("paymentMethod", rs.getString("payment_method"));
           row.put("categoryName", rs.getString("category_name"));
+          row.put("currency", rs.getString("currency"));
           out.add(row);
         }
       }
@@ -304,15 +292,16 @@ public class ExpenseDAO {
     return out;
   }
 
-  // ==============================
-  // NEW: list by arbitrary date range
-  // ==============================
+  /**
+   * List expenses within a date range
+   */
   public List<Map<String, Object>> listByDateRange(int userId, LocalDate from, LocalDate to)
       throws Exception {
 
     String sql;
+    boolean singleDate = (to == null);
 
-    if (to == null) {
+    if (singleDate) {
       sql = """
             SELECT e.expense_id, e.amount, e.expense_date, e.description,
                    e.payment_method, c.category_name, e.currency
@@ -342,13 +331,14 @@ public class ExpenseDAO {
       ps.setInt(1, userId);
       ps.setDate(2, Date.valueOf(from));
 
-      if (to != null) {
+      if (!singleDate) {
         ps.setDate(3, Date.valueOf(to));
       }
 
       try (ResultSet rs = ps.executeQuery()) {
         while (rs.next()) {
           Map<String, Object> row = new HashMap<>();
+          row.put("expenseId", rs.getInt("expense_id"));
           row.put("expenseDate", rs.getDate("expense_date").toLocalDate());
           row.put("amount", rs.getDouble("amount"));
           row.put("description", rs.getString("description"));

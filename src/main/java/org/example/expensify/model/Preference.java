@@ -4,11 +4,10 @@ package org.example.expensify.model;
 public class Preference {
   private int preferenceId;
   private int userId;
-  private String themeMode; // LIGHT/DARK
-  private String currency;  // USD, INR, ...
+  private String themeMode;
+  private String currency;
   private double defaultBudget;
 
-  // getters/setters
   public int getPreferenceId() {
     return preferenceId;
   }

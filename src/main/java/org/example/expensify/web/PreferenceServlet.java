@@ -26,10 +26,8 @@ public class PreferenceServlet extends HttpServlet {
     try {
       int userId = uid(req);
 
-      // Load preference from DB
       Preference pref = prefDAO.get(userId);
 
-      // Keep in session (used by header.jsp for theme + currency)
       req.getSession().setAttribute("prefs", pref);
 
       req.setAttribute("pref", pref);
@@ -51,13 +49,10 @@ public class PreferenceServlet extends HttpServlet {
       String currency = req.getParameter("currency");
       double budget = Double.parseDouble(req.getParameter("default_budget"));
 
-      // Update DB
       prefDAO.update(userId, theme, currency, budget);
 
-      // Reload updated preferences
       Preference updated = prefDAO.get(userId);
 
-      // Store in session for global use (header.jsp)
       req.getSession().setAttribute("prefs", updated);
 
       resp.sendRedirect(req.getContextPath() + "/preferences");

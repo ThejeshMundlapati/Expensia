@@ -41,7 +41,6 @@ public class CategoryDAO {
   }
 
 
-  /** ✅ Creates custom category and returns new ID */
   public int createAndReturnId(int userId, String name) throws Exception {
     String sql = "INSERT INTO categories(category_name, is_default, user_id) VALUES (?,0,?)";
     try (Connection c = DB.get();

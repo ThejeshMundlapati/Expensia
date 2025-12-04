@@ -1,6 +1,5 @@
 package org.example.expensify.dao;
 
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +44,6 @@ public class AlertDAO {
     }
   }
 
-  // Add this method to your existing AlertDAO class
 
   public int countUnseen(int userId) throws Exception {
     String sql = "SELECT COUNT(*) FROM alerts WHERE user_id = ? AND seen = 0";

@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
-    // Read preference object stored in session by PreferenceServlet
     org.example.expensify.model.Preference prefs =
             (org.example.expensify.model.Preference) session.getAttribute("prefs");
 

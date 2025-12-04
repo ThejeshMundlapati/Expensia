@@ -11,10 +11,8 @@ public class Expense {
   private String description;
   private String paymentMethod;
 
-  // NEW: store currency snapshot used when the expense was created
-  private String currency; // e.g., "USD", "INR", ...
+  private String currency;
 
-  // getters/setters
   public int getExpenseId() { return expenseId; }
   public void setExpenseId(int expenseId) { this.expenseId = expenseId; }
 

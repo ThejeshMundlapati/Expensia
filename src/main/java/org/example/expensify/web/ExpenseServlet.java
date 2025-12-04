@@ -40,11 +40,9 @@ public class ExpenseServlet extends HttpServlet {
     String path = req.getServletPath();
 
     try {
-      // ================= DASHBOARD (with month/year filter) ================
       if ("/dashboard".equals(path)) {
         int userId = uid(req);
 
-        // Load latest preferences into session
         Preference prefs = prefDAO.get(userId);
         req.getSession().setAttribute("prefs", prefs);
 
@@ -61,18 +59,15 @@ public class ExpenseServlet extends HttpServlet {
         req.setAttribute("selectedMonth", month);
         req.setAttribute("selectedYear", year);
 
-        // list for that month
         List<Map<String, Object>> list = expenseDAO.listByMonth(userId, month, year);
         req.setAttribute("recentExpenses", list);
 
-        // total for that month (for top-right card)
         double total = expenseDAO.monthTotal(userId, month, year);
         req.setAttribute("monthTotal", total);
 
         req.getRequestDispatcher("/dashboard.jsp").forward(req, resp);
       }
 
-      // ================= ADD EXPENSE FORM =================
       else if ("/expense/add".equals(path)) {
         int userId = uid(req);
         req.setAttribute("categories", categoryDAO.listForUser(userId));
@@ -81,7 +76,6 @@ public class ExpenseServlet extends HttpServlet {
         req.getRequestDispatcher("/add_expense.jsp").forward(req, resp);
       }
 
-      // ================= EDIT EXPENSE FORM =================
       else if ("/expense/edit".equals(path)) {
         int userId = uid(req);
         int id = Integer.parseInt(req.getParameter("id"));
@@ -108,7 +102,6 @@ public class ExpenseServlet extends HttpServlet {
         req.getRequestDispatcher("/edit_expense.jsp").forward(req, resp);
       }
 
-      // ================= DELETE EXPENSE =================
       else if ("/expense/delete".equals(path)) {
         int userId = uid(req);
         int id = Integer.parseInt(req.getParameter("id"));
@@ -124,7 +117,6 @@ public class ExpenseServlet extends HttpServlet {
         resp.sendRedirect(redirect);
       }
 
-      // ================= FULL LIST (unchanged) =================
       else if ("/expenses".equals(path)) {
         int userId = uid(req);
         req.setAttribute("expenses", expenseDAO.listAll(userId));
@@ -146,7 +138,6 @@ public class ExpenseServlet extends HttpServlet {
     String currency = (prefs != null) ? prefs.getCurrency() : "USD";
 
     try {
-      // ============== CREATE NEW EXPENSE ==============
       if ("/expense/add".equals(path)) {
 
         int userId = uid(req);
@@ -184,7 +175,6 @@ public class ExpenseServlet extends HttpServlet {
         resp.sendRedirect(req.getContextPath() + "/dashboard");
       }
 
-      // ============== UPDATE EXISTING EXPENSE ==============
       else if ("/expense/update".equals(path)) {
 
         int userId = uid(req);
@@ -217,7 +207,6 @@ public class ExpenseServlet extends HttpServlet {
 
         String method = req.getParameter("payment_method");
 
-        // currency is NOT changed here
         expenseDAO.updateExpense(userId, expenseId, categoryId, amount, date, desc, method);
 
         String month = req.getParameter("month");

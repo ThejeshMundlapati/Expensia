@@ -4,9 +4,8 @@ public class Category {
   private int categoryId;
   private String categoryName;
   private boolean isDefault;
-  private Integer userId; // null for system
+  private Integer userId;
 
-  // getters/setters
 
   public int getCategoryId() {
     return categoryId;

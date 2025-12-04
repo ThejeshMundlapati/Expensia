@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: theje
-  Date: 09-11-2025
-  Time: 17:28
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="fragments/header.jsp"%>
 

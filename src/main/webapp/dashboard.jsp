@@ -13,12 +13,8 @@
 
 <div class="dashboard-layout">
 
-    <!-- ============================
-         LEFT SIDEBAR
-    ============================ -->
     <div class="dashboard-sidebar">
 
-        <!-- FILTER PANEL -->
         <div class="card dashboard-filter-card">
             <h3>Filter</h3>
 
@@ -43,7 +39,6 @@
         </div>
 
 
-        <!-- MONTHLY TOTAL PANEL -->
         <%
             Double totalObj = (Double) request.getAttribute("monthTotal");
             if (totalObj != null) {
@@ -78,11 +73,6 @@
 
     </div>
 
-
-    <!-- ============================
-         RIGHT SIDE — EXPENSE LIST
-         (unchanged as you requested)
-    ============================ -->
     <div class="card dashboard-main">
         <h3>Expenses for ${selectedMonth} / ${selectedYear}</h3>
 

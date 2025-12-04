@@ -48,20 +48,6 @@ html[data-theme='DARK'] .table td {
     border-bottom:1px solid #555;
 }
 
-
-
-
-/*body.login-bg {*/
-/*    background-image: url("../img/login-bg.avif");*/
-/*    background-size: cover;*/
-/*    background-position: center;*/
-/*    background-repeat: no-repeat;*/
-/*    background-attachment: fixed;*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*}*/
-
-
 /* Login background */
 body.login-bg {
     background-image: url("../img/login-bg.avif");
@@ -71,8 +57,8 @@ body.login-bg {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    height: 100vh;          /* Force full screen */
-    overflow: hidden;       /* Remove scroll */
+    height: 100vh;
+    overflow: hidden;
 }
 
 body.preference {
@@ -83,8 +69,8 @@ body.preference {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    height: 100vh;          /* Force full screen */
-    overflow: hidden;       /* Remove scroll */
+    height: 100vh;
+    overflow: hidden;
 }
 body.dashboard {
     background-image: url("../img/dashboard.webp");
@@ -95,10 +81,9 @@ body.dashboard {
     padding: 0;
     font-family: Arial, sans-serif;
 
-    /* FIXES */
-    min-height: 100vh;   /* allow page to grow taller */
-    overflow-x: hidden;  /* hide sideways scroll ONLY */
-    overflow-y: auto;    /* ✔ scrolling works */
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 body.alert {
@@ -110,10 +95,9 @@ body.alert {
     padding: 0;
     font-family: Arial, sans-serif;
 
-    /* FIXES */
-    min-height: 100vh;   /* allow page to grow taller */
-    overflow-x: hidden;  /* hide sideways scroll ONLY */
-    overflow-y: auto;    /* ✔ scrolling works */
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 body.export {
@@ -125,10 +109,9 @@ body.export {
     padding: 0;
     font-family: Arial, sans-serif;
 
-    /* FIXES */
-    min-height: 100vh;   /* allow page to grow taller */
-    overflow-x: hidden;  /* hide sideways scroll ONLY */
-    overflow-y: auto;    /* ✔ scrolling works */
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 body.add_expense {
@@ -140,56 +123,45 @@ body.add_expense {
     padding: 0;
     font-family: Arial, sans-serif;
 
-    /* FIXES */
-    min-height: 100vh;   /* allow page to grow taller */
-    overflow-x: hidden;  /* hide sideways scroll ONLY */
-    overflow-y: auto;    /* ✔ scrolling works */
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 
-
-/* ============================
-   FIX LOGIN CARD ALIGNMENT
-============================ */
-
-/* Move card slightly UP (not too high) */
 .login-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    padding-top: 20px;   /* pushes slightly upward */
+    padding-top: 20px;
 }
 
-/* Increase card size downward */
 .login-card {
     width: 480px;
-    padding: 32px 32px 45px 32px;   /* bottom padding increased */
-    margin-top: -20px;             /* moves card up just a little */
+    padding: 32px 32px 45px 32px;
+    margin-top: -20px;
     border-radius: 16px;
     background: rgba(255, 255, 255, 0.92);
     box-shadow: 0px 10px 40px rgba(0,0,0,0.25);
 }
 
-/* Add spacing under last button */
 .login-card button:last-of-type {
     margin-bottom: 10px;
 }
 
 .login-card * {
     width: 100%;
-    box-sizing: border-box;       /* Ensures everything aligns perfectly */
+    box-sizing: border-box;
 }
 
 
-/* Headings */
 .login-card h2, .login-card h3 {
     text-align: center;
     margin-bottom: 10px;
     margin-top: 10px;
 }
 
-/* Inputs */
 .input {
     width: 100%;
     padding: 10px;
@@ -198,8 +170,6 @@ body.add_expense {
     margin: 8px 0;
 }
 
-/* Buttons – FIXED WIDTH */
-/* DEFAULT button style (for dashboard etc.) */
 .btn {
     display: inline-block;
     padding: 10px 14px;
@@ -210,7 +180,6 @@ body.add_expense {
     cursor: pointer;
 }
 
-/* Full-width only for login page */
 .login-card .btn {
     width: 100%;
     padding: 12px;
@@ -218,47 +187,38 @@ body.add_expense {
 
 
 
-/* Fix table action buttons */
 .table .btn {
-    width: auto;                /* Prevents stretching */
-    padding: 6px 14px;          /* Compact buttons */
+    width: auto;
+    padding: 6px 14px;
     font-size: 14px;
     display: inline-block;
-    white-space: nowrap;        /* Keeps on same line */
+    white-space: nowrap;
 }
 
 .table td {
-    white-space: nowrap;        /* Ensures row content stays on one line */
+    white-space: nowrap;
 }
 
 .table tr td:last-child {
-    width: 140px;               /* Enough space for both buttons */
+    width: 140px;
 }
 
 
-/* ============================
-   DASHBOARD LAYOUT IMPROVEMENTS
-============================ */
-
-/* Outer layout */
 .dashboard-layout {
     display: flex;
     gap: 24px;
     margin-top: 20px;
 }
 
-/* Left filter card */
 .dashboard-sidebar {
     width: 280px;
     flex-shrink: 0;
 }
 
-/* Main section */
 .dashboard-main {
     flex: 1;
 }
 
-/* Beautiful card style */
 .card {
     background: #fff;
     border: 1px solid #e5e7eb;
@@ -266,7 +226,6 @@ body.add_expense {
     padding: 20px;
     margin-bottom: 20px;
 
-    /* ✨ Modern elevation */
     box-shadow: 0px 3px 10px rgba(0,0,0,0.05);
     transition: box-shadow 0.2s;
 }
@@ -275,14 +234,12 @@ body.add_expense {
     box-shadow: 0px 6px 18px rgba(0,0,0,0.08);
 }
 
-/* Section titles */
 .section-title {
     font-size: 22px;
     font-weight: 600;
     margin-bottom: 12px;
 }
 
-/* Table improvements */
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -300,7 +257,6 @@ body.add_expense {
     border-bottom: 1px solid #eee;
 }
 
-/* Action buttons inline + clean */
 .table tr td:last-child {
     text-align: right;
     white-space: nowrap;
@@ -313,7 +269,6 @@ body.add_expense {
     border-radius: 6px;
 }
 
-/* Monthly total card */
 .total-card {
     text-align: center;
 }
@@ -329,9 +284,6 @@ body.add_expense {
     font-size: 13px;
 }
 
-/* ---------------------------------------
-   SIDEBAR LAYOUT FIXES
----------------------------------------- */
 .dashboard-layout {
     display: flex;
     gap: 30px;
@@ -339,13 +291,11 @@ body.add_expense {
     align-items: flex-start;
 }
 
-/* Sidebar slimmer */
 .dashboard-sidebar {
     width: 240px;
     flex-shrink: 0;
 }
 
-/* Filter card compact */
 .dashboard-filter-card {
     padding: 14px !important;
 }
@@ -367,7 +317,6 @@ body.add_expense {
     height: 34px;
 }
 
-/* Monthly total card compact */
 .dashboard-total-card h3 {
     font-size: 18px;
 }
@@ -377,41 +326,34 @@ body.add_expense {
     font-size: 14px;
 }
 
-/* DO NOT TOUCH TABLE — so table code unchanged */
-
-/* FIX: Prevent Year and Month inputs from overflowing sidebar */
 .dashboard-sidebar .input,
 .dashboard-sidebar select {
     width: 100%;
-    max-width: 210px;     /* <--- THIS FIXES THE OVERFLOW */
+    max-width: 210px;
     box-sizing: border-box;
 }
 
-/* Ensuring the form is centered and has some spacing */
 .form-container {
-    max-width: 500px; /* Set max width */
-    margin: 0 ;   /* Center the form horizontally */
-    padding: 20px;    /* Add some padding around */
-    background-color: #fff; /* Ensure the background is consistent */
+    max-width: 500px;
+    margin: 0 ;
+    padding: 20px;
+    background-color: #fff;
     border-radius: 12px;
 }
 
-/* Giving inputs and selects a consistent width */
 .input, select {
-    width: 100%; /* Ensure all inputs take the full width */
+    width: 100%;
     padding: 10px;
-    margin-bottom: 12px; /* Ensure some space between elements */
+    margin-bottom: 12px;
     border-radius: 8px;
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
 
-/* Style for the custom category box */
 #customCategoryBox {
     margin-top: 10px;
 }
 
-/* Ensure buttons are styled correctly */
 .btn {
     display: inline-block;
     padding: 10px 14px;
@@ -420,10 +362,9 @@ body.add_expense {
     background-color: #0366d6;
     color: white;
     cursor: pointer;
-    width: 100%; /* Make the button full-width */
+    width: 100%;
 }
 
-/* Flash error messages */
 .flash {
     margin: 10px 0;
     padding: 12px;
@@ -441,44 +382,32 @@ body.add_expense {
     color: #34d399;
 }
 
-
-/* ============================================
-   FIX DARK MODE TEXT ON DASHBOARD BACKGROUND
-=============================================== */
-
-/* All normal text */
 html[data-theme='DARK'] body.dashboard * {
     color: #ffffff !important;
 }
 
-/* Table header background should be darker */
 html[data-theme='DARK'] body.dashboard .table th {
     background: rgba(0,0,0,0.4) !important;
 }
 
-/* Table row shading */
 html[data-theme='DARK'] body.dashboard .table td {
     background: rgba(0,0,0,0.25) !important;
 }
 
-/* Cards */
 html[data-theme='DARK'] body.dashboard .card {
     background: rgba(20, 20, 20, 0.80) !important;
     border-color: #555 !important;
 }
 
-/* Buttons */
 html[data-theme='DARK'] body.dashboard .btn {
     background: #4e8cff !important;
     color: white !important;
 }
 
-/* Sidebar labels (Month/Year) */
 html[data-theme='DARK'] body.dashboard label {
     color: #ffffff !important;
 }
 
-/* Input fields */
 html[data-theme='DARK'] body.dashboard .input,
 html[data-theme='DARK'] body.dashboard select {
     background: #333 !important;
@@ -486,38 +415,29 @@ html[data-theme='DARK'] body.dashboard select {
     border-color: #666 !important;
 }
 
-/* ============================================
-   FIX DARK MODE TEXT ON ALERT PAGE
-=============================================== */
-
 html[data-theme='DARK'] body.alert * {
     color: #ffffff !important;
 }
 
-/* Table header background dark */
 html[data-theme='DARK'] body.alert .table th {
     background: rgba(0,0,0,0.45) !important;
 }
 
-/* Table rows */
 html[data-theme='DARK'] body.alert .table td {
     background: rgba(0,0,0,0.25) !important;
 }
 
-/* Card background */
 html[data-theme='DARK'] body.alert .card {
     background: rgba(20,20,20,0.85) !important;
     border-color: #555 !important;
 }
 
-/* Buttons (Mark seen) */
 html[data-theme='DARK'] body.alert .btn,
 html[data-theme='DARK'] body.alert .btn.secondary {
     background: #4e8cff !important;
     color: white !important;
 }
 
-/* Input fields (if any later added) */
 html[data-theme='DARK'] body.alert input {
     background: #333 !important;
     border-color: #666 !important;

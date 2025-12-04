@@ -11,7 +11,6 @@
                -1px  1px 3px rgba(0,0,0,0.8),
                 1px  1px 3px rgba(0,0,0,0.8);">Preferences</h2>
 
-<!-- Wrap everything in same centered container as Add Expense -->
 <form method="post" class="card form-container">
 
     <label>Theme Mode</label>
